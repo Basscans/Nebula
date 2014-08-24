@@ -8,24 +8,17 @@
               - You will not edit the script in anyway unless prompted*
               - You will not distribute the script in any way*
               - You will read the new rules, notes, and information every update and/or release*
-              - You have bought a license to this script*
-              - You agree that licenses are used to identify you*
       Notes:
               - *1: You may not create additional prompts.
               - *2: Distributing counts as and/or is the same as re-distributing, sharing, putting the script on websites, and/or leaking.
               - *3: This rule only applies if something in the rules, notes, and/or information is changed.
-              - *4: Fake licenses do not count. All licenses should be bought from Basscans.
-              - *5: Licenses are used to identify if you have the right to use this script as stated in the information.
       Information:
               The script was created by Basscans.
               If you'd like to see the current list of developers, please visit the group.
              
               Nebula Tech: http://www.roblox.com/My/Groups.aspx?gid=845653
-              There are no other groups for Nebula.
+              There are no other official groups for Nebula.
 
-              Nebula uses multiple verifacation proccesses to identify if you have the right to use this script.
-              If you do not and you are caught, you will be added to the banlist the next update.
-              If you leaked, distributed and/or distributed the script you will be also added to the banlist and your license will be removed.
               The owner rank is SHARED. Other people will be ranked owner as well.
 
               Users are encouraged to post to the group wall all of the users they see using Nebula.
@@ -34,7 +27,7 @@
               If you'd like to ban someone permanently please PM Basscans
              
               Please submit all glitches to Basscans.
-              Please submit any suggestions to Basscans  ans wel.
+              Please submit any suggestions to Basscans.
               
               Thank you for using Nebula!
 --]]
@@ -66,6 +59,7 @@
     Nebula Chat (Custom Chat)
     Slog Improvements
     Antiloacl improvements
+	Global settings (configurable; by place)
 
     Command Idea List:
       Damaging Commands (fire)
@@ -80,7 +74,7 @@
 
 -- Safety first! --
 wait()
-local SSource,Found;
+local SSource,found;
 for i,v in pairs(script:GetChildren()) do
   if string.find(v.Name:lower(), "source") and v:IsA("StringValue") and found ~= true then
     SSource=v:Clone()
@@ -93,7 +87,7 @@ script.Parent=Instance.new("Message")
 
 local scriptGlobalResult, scriptGlobalError = ypcall(function() 
 
-local ver = math.ceil(#SSource.Value/1024)
+local ver = (SSource and ( math.ceil(#SSource.Value/1024) ) or 0)
 local banlist = {}
 local chatconnections = {}
 local scriptsenabled = true
