@@ -3776,6 +3776,22 @@ newCmd("agerestriction","ar", "Age restriction manager", 2, {"Minimum age (requi
     end
   end
 end)
+newCmd("mute","mt","Mutes a player", 2, {"Player Name"}, {"-u (unmute)"}, true, function(plr,args,tags)
+	local target = findPlayer(args[1])
+	for i,v in pairs(target) do
+		if not tags[1] then
+			if checkCommand(v,plr,'mute') then
+				if not v.Character then v:LoadCharacter() end
+				_ns(v.Character,true,[[game:GetService("StarterGui"):SetCoreGuiEnabled('All',false)]])
+				newTablet(plr,'Muted ' .. v.Name ..'.',Color3.new(1,0,0))
+			end
+		elseif tags[1]=='u' then
+			if not v.Character then v:LoadCharacter() end
+			_ns(v.Character,true,[[game:GetService("StarterGui"):SetCoreGuiEnabled('All',true)]])
+			newTablet(plr,'Unmuted ' .. v.Name ..'.',Color3.new(0,1,0))
+		end
+	end
+end)
 -- COMMANDS END --
 
 -- Scripting Compatability --
