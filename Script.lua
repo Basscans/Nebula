@@ -182,7 +182,7 @@ local nebulaLogo = "rbxassetid://169780191"
 local sound
 local remoteSettings={
   update=true;
-  links={https://raw.githubusercontent.com/Basscans/Nebula/master/defaultRemote"};
+  links={"https://raw.githubusercontent.com/Basscans/Nebula/master/defaultRemote"};
 }
 local commands = {
   list={};
