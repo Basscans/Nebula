@@ -25,6 +25,8 @@ function nebServ.OnServerEvent(client,...)
 		if type(args[2])=='table' then
 			nilChat(args[2],args[3])
 		end
+	elseif args[1]=='getRank' then
+		nebServ.re:FireClient(client,'setRank',getNilRank(args[2].Name))
 	end
 end
 

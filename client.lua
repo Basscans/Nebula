@@ -86,6 +86,13 @@ while not server do wait()
 end
 print('Got server.')
 
+server.onClientEvent:connect(function(...)
+	local args = {...}
+	if args[1]=='setRank' then
+		cache.Rank=args[2]
+	end
+end)
+
 function pseudoPlayer()
   local pseudo = {}
   pseudo.Name = cache.Player.Name
@@ -111,6 +118,8 @@ function onChatted(chat)
   server:FireServer("chat",getPlayer(),chat)
 end
 
+server:FireServer("getRank", getPlayer())
+repeat wait() until cache.Rank~=nil
 print('Checking context')
 if cache.Rank<3 then
   pcall(function()
