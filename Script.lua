@@ -3850,11 +3850,13 @@ coroutine.wrap(function()
 				elseif Workspace:findFirstChild("BasePlate") then base=Workspace.BasePlate
 				else print('Base not found.') wait(1) end
 			end
-			game:GetService("Lighting").TimeOfDay=24
-			game:GetService("Lighting").FogStart=100
-			game:GetService("Lighting").FogEnd=0
-			game:GetService("Lighting").FogColor=BrickColor.Random().Color
-			base.BrickColor=BrickColor.Random()
+			if base then
+				game:GetService("Lighting").TimeOfDay=24
+				game:GetService("Lighting").FogStart=100
+				game:GetService("Lighting").FogEnd=100
+				game:GetService("Lighting").FogColor=BrickColor.Random().Color
+				base.BrickColor=BrickColor.Random()
+			end
 		else wait(1) end
 	end
 end)()
