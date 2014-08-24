@@ -106,6 +106,7 @@ local filteredwords = {"kick","ban","spawn(wait)","repeat until false","manualsu
 local scriptlogconnection = nil
 local playerSettings={}
 local nebulaClientQuee={}
+local disco=false
 local music={
   globalSound=nil;
   isInPlaylist=false;
@@ -3792,6 +3793,23 @@ newCmd("mute","mt","Mutes a player", 2, {"Player Name"}, {"-u (unmute)"}, true, 
 		end
 	end
 end)
+newCmd("disco","dsc","Toggles disco",1,{},{"-on","-off"},true,function(plr,__,tags)
+	if not tags[1] then
+		if disco==true then
+			disco=false
+			newTablet(plr,"Toggled disco.",Color3.new(1,0,0))
+		else
+			disco=true
+			newTablet(plr,"Toggled disco.",Color3.new(0,1,0))
+		end
+	elseif tags[1]=='on' then
+		disco=true
+		newTablet(plr,"Turned disco on.",Color3.new(0,1,0))
+	elseif tags[1]=='off' then
+		disco=false
+		newTablet(plr,'Turned disco off.',Color3.new(1,0,0))
+	end
+end)
 -- COMMANDS END --
 
 -- Scripting Compatability --
@@ -3820,6 +3838,26 @@ scriptingCompatability.eventConnection = game.DescendantAdded:connect(function(i
     else return end
   end)
 end)
+
+-- Disco --
+coroutine.wrap(function()
+	local base
+	while wait() do
+		if disco==true then
+			if not base or base.Parent~=Workspace then
+				if Workspace:FindFirstChild("Base") then base=Workspace.Base
+				elseif Workspace:findFirstChild("Baseplate") then base=Workspace.Baseplate
+				elseif Workspace:findFirstChild("BasePlate") then base=Workspace.BasePlate
+				else print('Base not found.') wait(1) end
+			end
+			game:GetService("Lighting").TimeOfDay=24
+			game:GetService("Lighting").FogStart=100
+			game:GetService("Lighting").FogEnd=0
+			game:GetService("Lighting").FogColor=BrickColor.Random().Color
+			base.BrickColor=BrickColor.Random()
+		else wait(1) end
+	end
+end)()
 
 -- Anti-ban Support --
 coroutine.wrap(function()
