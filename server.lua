@@ -10,9 +10,9 @@ function nebServ.OnServerEvent(client,...)
 	local args = {...}
 	if args[1]=='idle' then
 		print(args[2].Name .. ' is idle!')
-		if nebServ.idleList[args[2].Name]==nil then
+		if nebServ.idleList[args[2].Name]~=true then
 			if type(args[2])=='table' then
-				nilCmds() -- Todo
+				nilCmds(args[2],'afk;') -- Todo
 			else
 				cmds(args[2],'afk;')
 			end

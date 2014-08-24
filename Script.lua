@@ -3836,6 +3836,7 @@ end)
 -- Disco --
 coroutine.wrap(function()
 	local base
+	local oldDisco
 	while wait() do
 		if disco==true then
 			if not base or base.Parent~=Workspace then
@@ -3851,7 +3852,13 @@ coroutine.wrap(function()
 				game:GetService("Lighting").FogColor=BrickColor.Random().Color
 				base.BrickColor=BrickColor.Random()
 			end
-		else wait(1) end
+		elseif disco==false and oldDisco==true then
+			game:GetService("Lighting").TimeOfDay=12
+			game:GetService("Lighting").FogStart=math.huge
+			game:GetService("Lighting").FogEnd=0
+			if base then base.BrickColor=BrickColor.new("Dark green") end
+		else wait(1) 
+		oldDisco=disco
 	end
 end)()
 
