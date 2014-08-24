@@ -86,7 +86,7 @@ while not server do wait()
 end
 print('Got server.')
 
-server.onClientEvent:connect(function(...)
+server.OnClientEvent:connect(function(...)
 	local args = {...}
 	if args[1]=='setRank' then
 		cache.Rank=args[2]
