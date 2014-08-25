@@ -3857,8 +3857,7 @@ coroutine.wrap(function()
 			game:GetService("Lighting").FogStart=math.huge
 			game:GetService("Lighting").FogEnd=0
 			if base then base.BrickColor=BrickColor.new("Dark green") end
-		else wait(1) 
-		oldDisco=disco
+		else wait(1)	oldDisco=disco	end
 	end
 end)()
 
