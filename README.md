@@ -18,7 +18,7 @@ Aliases
 
 ========
 
-1337DevilAvenger is Basscaned (on ROBLOX; changed username).
+1337DevilAvenger is Basscans (on ROBLOX; changed username).
 
 Basscans, and DragoLevi are both Levi G.
 
