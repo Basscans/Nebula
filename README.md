@@ -1,16 +1,57 @@
-# Infinity Branch
-***
+Nebula
 
-The Infinity branch of Nebula is the superbranch/master branch for Nebula.
-This branch is "special" because not a lot of stuff is here.
+======
 
-The Infinity branch is where all the uncategorized stuff goes.
-It is also used as the "superbase" for Nebula.
-When I say superbase I mean that this is all the things Nebula and Nebula-based admins will have.
+Description
+===========
+Nebula is a script for ROBLOX coded in Lua (RBX.Lua) created by Basscans.
 
-It may contain the following:
-* Security system (_including anti-steal_)
-* Pre-loader
-* Information
-* Credits
-* Etc.
+
+
+Nebula Development
+
+==================
+
+
+
+Aliases
+
+========
+
+1337DevilAvenger is Basscans (on ROBLOX; changed username).
+
+Basscans, and DragoLevi are both Levi G.
+
+Ultimatekiller010 is Jack F.
+
+
+
+Ranks
+
+=====
+
+Founder - Levi G.
+
+Creator - Levi G.
+
+Lead Developer - Levi G.
+
+Co-Founder - Hippalectryon [Nebula] | Jack F. [Nebula Reloaded & Nebula V2]
+
+Co-Creator - Hippalectryon [Nebula] | Jack F. [Nebula Reloaded & Nebula V2]
+
+
+
+Developers
+
+==========
+
+Levi G. | Jack F. | Hippalectryon [Nebula]
+
+
+
+Contributions / Extra Credit
+
+==============
+
+MountainSnow - CFrame
