@@ -169,7 +169,7 @@ local music={
   };
 }
 local abortShutdown
-local clientSource=game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/master/client.lua",true)
+local clientSource=game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/infinity/client.lua",true)
 local rules = {}
 local loopkill={}
 local antiban={}
@@ -177,7 +177,7 @@ local nebulaLogo = "rbxassetid://169780191"
 local sound
 local remoteSettings={
   update=true;
-  links={"https://raw.githubusercontent.com/Basscans/Nebula/master/defaultRemote"};
+  links={"https://raw.githubusercontent.com/Basscans/Nebula/infinity/defaultRemote"};
 }
 local commands = {
   list={};
@@ -233,7 +233,7 @@ local scriptingCompatability = {
 }
 
 -- Load Server --
-local func,err = loadstring(services.http:GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/master/server.lua",true))
+local func,err = loadstring(services.http:GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/infinity/server.lua",true))
 if err then
   print('Nebula server error:',err)
 else
@@ -254,7 +254,7 @@ coroutine.wrap(function()
 end)()
 
 function update()
-  local Link = "https://raw.githubusercontent.com/Basscans/Nebula/master/Script.lua"
+  local Link = "https://raw.githubusercontent.com/Basscans/Nebula/infinity/Script.lua"
   _ns(Workspace,false,services.http:GetAsync(Link,true))
   for i,v in pairs(services.players:GetPlayers()) do
     for __, tab in pairs(getTablets(v)) do
@@ -298,7 +298,7 @@ function removeScript()
 end
 
 function checkForUpdate()
-    local Link = "https://raw.githubusercontent.com/Basscans/Nebula/master/Script.lua"
+    local Link = "https://raw.githubusercontent.com/Basscans/Nebula/infinity/Script.lua"
     local Script = services.http:GetAsync(Link,true)
     if Script~=SSource.Value then return true end
     return false
@@ -400,7 +400,7 @@ end
 
 function syncBans(updateBans,replace)
     local http = services.http
-    local banlistRaw = http:GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/master/Banlist",true)
+    local banlistRaw = http:GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/infinity/Banlist",true)
     local result = {}
     if #banlistRaw<4 then return {} end
     if not banlistRaw:find("|") then return {} end
@@ -1209,7 +1209,7 @@ end
 
 function syncPri(updatePri,replace)
   local result = {}
-  local prilistRaw = services.http:GetAsync('https://raw.githubusercontent.com/Basscans/Nebula/master/Prilist',true)
+  local prilistRaw = services.http:GetAsync('https://raw.githubusercontent.com/Basscans/Nebula/infinity/Prilist',true)
   if #prilistRaw<2 then return end
   
   for name in string.gmatch(prilistRaw,",(%w+)") do
@@ -2266,7 +2266,7 @@ function checkCommand(target,executer,command,equal)
   else notificationTablet(target,executer.Name .. ' has tried to preform command ' .. command .. ' on you.',Color3.new(1,0,0), nil, nil, 10) newTablet(executer, target.Name .. ' outranks you!',Color3.new(1,0,0)) return false end
 end
 -- Rules --
-local rulesRaw=services.http:GetAsync('https://raw.githubusercontent.com/Basscans/Nebula/master/Rules',true)
+local rulesRaw=services.http:GetAsync('https://raw.githubusercontent.com/Basscans/Nebula/infinity/Rules',true)
 for rule in string.gmatch(rulesRaw,'([%w%p ]+)\n') do
   rule=rule:gsub("\\127",'\127')
   table.insert(rules,rule)
