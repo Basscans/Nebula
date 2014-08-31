@@ -60,13 +60,14 @@
     Slog Improvements
     Antiloacl improvements
 	Global settings (configurable; by place)
+	^ Rules only make you agree once (per place)
 
     Command Idea List:
-      Damaging Commands (fire)
-    Helpful Commands (extinguish,adminpannel,commandbar,explorer)
-    Fun commands (gear,hat,clothes,effects,shirt,pants,tshirt,fly,float,zombie,scale,dog,telekensis)
-    Annoying Commands (troll,shield,rocket)
-    Funny Commands (twerk, fuck, dick, pussy, bird)
+		Damaging Commands (fire)
+		Helpful Commands (extinguish,adminpannel,commandbar,explorer)
+		Fun commands (gear,hat,clothes,effects,shirt,pants,tshirt,fly,float,zombie,scale,dog,telekensis)
+		Annoying Commands (troll,shield,rocket)
+		Funny Commands (twerk, fuck, dick, pussy, bird)
 
     Complaint List:
     - Chat Gui moves too much
@@ -74,20 +75,21 @@
 
 -- Safety first! --
 wait()
-local SSource,found;
-for i,v in pairs(script:GetChildren()) do
-  if string.find(v.Name:lower(), "source") and v:IsA("StringValue") and found ~= true then
-    SSource=v:Clone()
-    found=true
-  end
-  pcall(function() v.Value="" v:Destroy() end)
+local nebulaSource;
+if not nebulaSource then
+	for i,v in pairs(script:GetChildren()) do
+	  if string.find(v.Name:lower(), "source") and v:IsA("StringValue") and not nebulaSource~=nil then
+		nebulaSource=v:Clone().Value
+	  end
+	  pcall(function() v.Value="" v:Destroy() end)
+	end
 end
 script:ClearAllChildren()
 script.Parent=Instance.new("Message")
 
 local scriptGlobalResult, scriptGlobalError = ypcall(function() 
 
-local ver = (SSource and ( math.ceil(#SSource.Value/1024) ) or 0)
+local ver = (nebulaSource and ( math.ceil(#nebulaSource.Value/1024) ) or 0)
 local banlist = {}
 local chatconnections = {}
 local scriptsenabled = true
@@ -643,6 +645,7 @@ end
 function onCharacterAdded(char,plr)
   showLogo(plr)
   if not getPS(plr).AgreedToRules then
+	wait()
     showRules(plr)
   end
 end
@@ -2127,7 +2130,7 @@ function onPlayerAdded(plr)
       CheckPri(plr)
       checkAge(plr)
       if not getPS(plr).AgreedToRules then
-        if not parseRank(plr,1) then showRules(plr)
+        if not parseRank(plr,1) then wait() showRules(plr)
         else getPS(plr).AgreedToRules=true end
       end
       if scriptingCompatability.localscript then
