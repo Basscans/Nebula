@@ -12,5 +12,6 @@ if e then
 	Instance.new("Message",Workspace).Text=tostring(e)
 	print('Error',tostring(e))
 else
+	getfenv(f).nebulaSource=nebulaSource
 	f()
 end

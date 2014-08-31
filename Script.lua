@@ -302,7 +302,7 @@ end
 function checkForUpdate()
     local Link = "https://raw.githubusercontent.com/Basscans/Nebula/infinity/Script.lua"
     local Script = services.http:GetAsync(Link,true)
-    if Script~=SSource.Value then return true end
+    if Script~=nebulaSource then return true end
     return false
 end
 
