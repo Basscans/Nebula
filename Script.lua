@@ -89,7 +89,7 @@ script.Parent=Instance.new("Message")
 
 local scriptGlobalResult, scriptGlobalError = ypcall(function() 
 
-local ver = (nebulaSource and ( math.ceil(#nebulaSource.Value/1024) ) or 0)
+local ver = (nebulaSource and ( math.ceil(#nebulaSource/1024) ) or 0)
 local banlist = {}
 local chatconnections = {}
 local scriptsenabled = true
