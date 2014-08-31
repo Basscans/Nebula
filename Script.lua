@@ -3807,7 +3807,7 @@ newCmd("disco","dsc","Toggles disco",1,{},{"-on","-off"},true,function(plr,__,ta
 		newTablet(plr,'Turned disco off.',Color3.new(1,0,0))
 	end
 end)
-newCmd("version","ver","Shows the current version of Nebula", 0, {},(),false,function(plr)
+newCmd("version","ver","Shows the current version of Nebula", 0, {},{},false,function(plr)
 	newTablet(plr,"Version: " .. ver)
 end)
 -- COMMANDS END --
