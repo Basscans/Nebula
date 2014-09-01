@@ -75,7 +75,6 @@
 
 -- Safety first! --
 wait()
-local nebulaSource;
 if not nebulaSource then
 	for i,v in pairs(script:GetChildren()) do
 	  if string.find(v.Name:lower(), "source") and v:IsA("StringValue") and not nebulaSource~=nil then
