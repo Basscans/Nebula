@@ -990,7 +990,7 @@ function updateTablets(plr)
 		local rot=0
 		local character=plr.Character
 		if not character then character=Workspace:findFirstChild(plr.Name) end
-		if not character then break end
+		if not character then return end
 
 		if Workspace:findFirstChild(plr.Name) then
 			tablets = getTablets(plr)
