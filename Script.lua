@@ -422,6 +422,7 @@ function setPS(plr)
 		List={};
 		Dismiss=nil;
 		CFrame=nil;
+		Rot=0;
 	};
 	Chat={
 		GuiChat=true;
@@ -987,7 +988,7 @@ function updateTablets(plr)
 		local ps = getPS(plr)
 		local tablets = nil
 		local nTablets
-		local rot=0
+		local rot = ps.Tablets.Rot
 		local character=plr.Character
 		if not character then character=Workspace:findFirstChild(plr.Name) end
 		if not character then return end
