@@ -1027,7 +1027,8 @@ function updateTablets(plr)
 							v.CFrame = CFrame.new(crot, pos.p) * CFrame.Angles(math.rad(12),0,0)
 						end
 					end
-				end)		
+				 end)
+				end
 			end
 		end
 	end)()
