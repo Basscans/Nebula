@@ -991,7 +991,7 @@ function startTabletCFrame(plr)
               ps.Tablets.Dismiss = nil
             end
                 
-                rot = rot + 0.05
+                rot = rot + 0.0005
                 for i,v in pairs(tablets) do
                   if v == nil or v.Parent==nil then
                     table.remove(tablets, i)
@@ -1010,7 +1010,7 @@ function startTabletCFrame(plr)
                             if v:findFirstChild("IsANotificationTablet") then
         v.CFrame = CFrame.new(crot, pos.p)
                             else
-        v.CFrame = CFrame.new(crot, pos.p) * CFrame.Angles(math.rad(5),0,0)
+        v.CFrame = CFrame.new(crot, pos.p) * CFrame.Angles(math.rad(12),0,0)
           end
                         end
                     end)
