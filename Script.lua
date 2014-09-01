@@ -988,7 +988,6 @@ function updateTablets(plr)
 		local ps = getPS(plr)
 		local tablets = nil
 		local nTablets
-		local rot = ps.Tablets.Rot
 		local character=plr.Character
 		if not character then character=Workspace:findFirstChild(plr.Name) end
 		if not character then return end
@@ -1006,7 +1005,7 @@ function updateTablets(plr)
 				ps.Tablets.Dismiss:Destroy()
 				ps.Tablets.Dismiss = nil
 			end		
-			rot = rot + 0.0005
+			ps.Tablets.Rot = ps.Tablets.Rot + 0.0005
 			for i,v in pairs(tablets) do
 				if v == nil or v.Parent==nil then
 					table.remove(tablets, i)
@@ -1015,10 +1014,10 @@ function updateTablets(plr)
 					if character ~= nil and character:findFirstChild("Torso") ~= nil then
 						local pos = character.Torso.CFrame
 						local radius = 4 + (#tablets * 0.5)
-						local x = math.sin((i / #tablets - (0.5 / #tablets) + rot * 2) * math.pi * 2) * radius
+						local x = math.sin((i / #tablets - (0.5 / #tablets) + ps.Tablets.Rot * 2) * math.pi * 2) * radius
 						local y = math.sin(tick())
 						if v:findFirstChild("IsANotificationTablet") then y = 3 end
-						local z = math.cos((i / #tablets - (0.5 / #tablets) + rot * 2) * math.pi * 2) * radius
+						local z = math.cos((i / #tablets - (0.5 / #tablets) + ps.Tablets.Rot * 2) * math.pi * 2) * radius
 						local arot = Vector3.new(x, y, z) + pos.p
 						local brot = v.CFrame.p
 						local crot = (arot * .1 + brot * .9)
