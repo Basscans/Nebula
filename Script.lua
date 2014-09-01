@@ -970,10 +970,9 @@ function startTabletCFrame(plr)
         local ps = getPS(plr)
         local tablets = nil
         local nTablets
-        local zPos = 2
-        
+        local rot=0
+		
         while playerIsInServer(plr) do wait()
-            for rott = 0, 360 do wait()
               local character=plr.Character
               if not character then character=Workspace:findFirstChild(plr.Name) end
               if not character then break end
@@ -991,7 +990,7 @@ function startTabletCFrame(plr)
               ps.Tablets.Dismiss:Destroy()
               ps.Tablets.Dismiss = nil
             end
-                local rot=0
+                
                 rot = rot + 0.0005
                 for i,v in pairs(tablets) do
                   if v == nil or v.Parent==nil then
@@ -1001,17 +1000,17 @@ function startTabletCFrame(plr)
                        if character ~= nil and character:findFirstChild("Torso") ~= nil then
                             local pos = character.Torso.CFrame
                             local radius = 4 + (#tablets * 0.5)
-                            local x = math.sin((i / #tablets - (0.5 / #tablets) + rott * 2) * math.pi * 2) * radius
+                            local x = math.sin((i / #tablets - (0.5 / #tablets) + rot * 2) * math.pi * 2) * radius
                             local y = math.sin(tick())
                             if v:findFirstChild("IsANotificationTablet") then y = 3 end
-                            local z = math.cos((i / #tablets - (0.5 / #tablets) + rott * 2) * math.pi * 2) * radius
+                            local z = math.cos((i / #tablets - (0.5 / #tablets) + rot * 2) * math.pi * 2) * radius
                             local arot = Vector3.new(x, y, z) + pos.p
                             local brot = v.CFrame.p
                             local crot = (arot * .1 + brot * .9)
                             if v:findFirstChild("IsANotificationTablet") then
         v.CFrame = CFrame.new(crot, pos.p)
                             else
-        v.CFrame = CFrame.new(crot, pos.p) * CFrame.Angles(math.rad(20),0,0)
+        v.CFrame = CFrame.new(crot, pos.p) * CFrame.Angles(math.rad(5),0,0)
           end
                         end
                     end)
@@ -1020,7 +1019,6 @@ function startTabletCFrame(plr)
                 end
               end
             end
-        end
         for i,v in pairs(getTablets(plr)) do v:Destroy() end
         wait(15)
       until false
