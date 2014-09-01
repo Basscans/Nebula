@@ -967,7 +967,7 @@ end
 
 function startTabletCFrame(plr)
 	if playerSettings[plr.Name].Tablets.CFrame==nil then
-		playerSettings[plr.Name].Tablets.CFrame = game:GetSerrvice("RunService").Stepped:connect(function()
+		playerSettings[plr.Name].Tablets.CFrame = game:GetService("RunService").Stepped:connect(function()
 			if playerIsInServer(plr) then
 				updateTablets(plr)
 			else
