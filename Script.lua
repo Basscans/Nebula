@@ -1005,7 +1005,7 @@ function updateTablets(plr)
 				ps.Tablets.Dismiss:Destroy()
 				ps.Tablets.Dismiss = nil
 			end		
-			ps.Tablets.Rot = ps.Tablets.Rot + 0.0005
+			ps.Tablets.Rot = ps.Tablets.Rot + 0.00005
 			for i,v in pairs(tablets) do
 				if v == nil or v.Parent==nil then
 					table.remove(tablets, i)
