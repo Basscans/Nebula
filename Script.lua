@@ -991,7 +991,7 @@ function startTabletCFrame(plr)
               ps.Tablets.Dismiss = nil
             end
                 
-                rot = rot + 0.0005
+                rot = rot + 0.05
                 for i,v in pairs(tablets) do
                   if v == nil or v.Parent==nil then
                     table.remove(tablets, i)
