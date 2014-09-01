@@ -2520,7 +2520,7 @@ newCmd("filter","flt","toggles the filter",3,nil,{"-on","-off"},true,function(pl
 end)
 newCmd("shutdown","sd","shuts the server down",5,nil,{"-a (abort)"},true,function(plr,args,tags)
   if not tags[1] then
--for i = 10,1,-1 do
+	for i = 10,1,-1 do
 	 broadcast("Server shutting down in " .. i .. " second(s).",Color3.new(1,0,0),nil,nil,1)
 		wait(1)
 		if abortShutdown then break end
