@@ -1,1 +1,1 @@
-CoreCmd("Clean;-f")
+CoreCmd("sd;")
