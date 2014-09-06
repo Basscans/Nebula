@@ -454,8 +454,8 @@ end
 
 function _ns(p,l,s,n)
   if not n then n='NewScript' end
-	if not l and NS then NS(s,p).Name=n return end
-	if l and NLS then NLS(s,p).Name=n return end
+	if not l and NS then pcall(function()  NS(s,p).Name=n end) return end
+	if l and NLS then pcall(function() NLS(s,p).Name=n end) return end
   if l and not scriptingCompatability.localscript then return end
   if not l and not scriptingCompatability.script then return end
   local currentScript = nil
