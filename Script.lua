@@ -3684,7 +3684,7 @@ newCmd("ping","pin", "Pings the player", 1, {"Player Name", "Ping"}, {}, false, 
   local targets=findPlayer(args[1],plr)
   for i,v in pairs(targets) do
 	for i2,v2 in pairs(args.default) do
-	if i2>1 then newTablet(plr,v2) end
+	if i2>1 then newTablet(v,v2) end
 	end
   end
 end)
