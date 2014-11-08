@@ -33,16 +33,6 @@
 --]]
 --[[
   Idea/To-Do List: (No ideas/to-dos? Look for FUTURE TODO in the script.)
-	Create ideas by looking into the following services:
-	AssetService
-	TeleportService
-	InsertService
-	Geometry
-	CollectionService
-	SoundService
-	NotificationService (not implemented yet,check)
-	MarketplaceService
-	LogService (for output)
 	
 	Customizable tablets (example I haz blue or red tabs and it show in cmd menu)
 	Anti-remove, update disable script command & update function
@@ -60,7 +50,6 @@
 	Slog Improvements
 	Antiloacl improvements
 	Global settings (configurable; by place)
-	^ Rules only make you agree once (per place)
 
 	Command Idea List:
 		Damaging Commands (fire)
@@ -171,7 +160,6 @@ local music={
 }
 local abortShutdown
 local clientSource=game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/Basscans/Nebula/infinity/client.lua",true)
-local rules = {}
 local loopkill={}
 local antiban={}
 local nebulaLogo = "rbxassetid://169780191"
@@ -431,7 +419,6 @@ function setPS(plr)
 	};
 		Rank=nil;
 		Antilocal={};
-		AgreedToRules=false;
 	Music={
 		localSound=nil;
 		inPlaylist=false;
@@ -645,10 +632,6 @@ end
 
 function onCharacterAdded(char,plr)
   showLogo(plr)
-  if not getPS(plr).AgreedToRules then
-	wait()
-	showRules(plr)
-  end
 end
 
 function notificationTablet(plr,Name,color,exe,rscript,thetime)
@@ -1206,7 +1189,6 @@ end
 function onChatted(plr,msg)
   msg = NoFilter(msg)
   table.insert(chatlog, {Name=tostring(plr.Name),Message=tostring(msg)})
-  if not getPS(plr).AgreedToRules then plr:Kick() end
   if string.sub(msg:lower(), 0, 3) == "/e " then
 	cmds(plr,msg:lower():sub(4))
   else
@@ -2007,61 +1989,6 @@ function showMusicGui(plr,global)
   end
 end
 
-function showRules(plr)
-  local plrgui = plr:findFirstChild("PlayerGui")
-  if not plrgui then plrgui = Instance.new("PlayerGui",plr) end
-  local g = Instance.new("ScreenGui",plrgui)
-  g.Name='Rules'
-  local bg = Instance.new("Frame",g)
-  bg.Name='RulesBg'
-  bg.BackgroundTransparency=.25
-  bg.BackgroundColor3=Color3.new()
-  bg.BorderColor3=Color3.new(1,1,1)
-  bg.Size=UDim2.new(1,0,1,0)
-  local co = Instance.new("ScrollingFrame",bg)
-  co.Name='Rules'
-  co.BackgroundColor3=Color3.new(1,1,1)
-  co.BorderColor3=Color3.new(1,0,0)
-  co.Position=UDim2.new(.1,0,.16,0)
-  co.Size=UDim2.new(.8,0,.69,0)
-  co.CanvasSize=UDim2.new(0,0,(0.05*#rules),0)
-  local agb = Instance.new("TextButton",bg)
-  agb.Name='Agree'
-  agb.Position=UDim2.new(.2,0,.9,0)
-  agb.Size=UDim2.new(.2,0,.05,0)
-  agb.Style='RobloxButtonDefault'
-  agb.Font="Arial"
-  agb.FontSize='Size18'
-  agb.Text="I Agree"
-  agb.TextColor3=Color3.new(1,1,1)
-  agb.TextWrapped=true
-  local dgb = Instance.new('TextButton',bg)
-  dgb.Name='Disagree'
-  dgb.Position=UDim2.new(.6,0,.9,0)
-  dgb.Size=UDim2.new(.2,0,.05,0)
-  dgb.Style='RobloxButtonDefault'
-  dgb.Font='Arial'
-  dgb.FontSize='Size18'
-  dgb.Text='I Disagree'
-  dgb.TextColor3=Color3.new(1,1,1)
-  dgb.TextWrapped=true
-  for i,v in pairs(rules) do
-	local rg = Instance.new("TextLabel",co)
-	rg.Name='RuleText'
-	rg.BackgroundTransparency=1
-	rg.Size=UDim2.new(1,0,.05,0)
-	rg.Position=UDim2.new(0,0,(#co:GetChildren()-1)*.05,0)
-	rg.Font='Arial'
-	rg.Text=v
-	rg.TextColor3=Color3.new()
-	rg.TextScaled=true
-	rg.TextWrapped=true
-	rg.TextXAlignment='Left'
-  end
-  dgb.MouseButton1Click:connect(function() plr:Kick() end)
-  agb.MouseButton1Click:connect(function() g:Destroy() getPS(plr).AgreedToRules=true end)
-end
-
 function checkAge(plr)
   if ageRestriction.Enabled==true then
 	if plr.AccountAge<ageRestriction.MinAge and not parseRrank(plr,1) then
@@ -2135,10 +2062,6 @@ function onPlayerAdded(plr)
 	checkBan(plr)
 	CheckPri(plr)
 	checkAge(plr)
-	if not getPS(plr).AgreedToRules then
-		if not parseRank(plr,1) then wait() showRules(plr)
-		else getPS(plr).AgreedToRules=true end
-	end
 	if scriptingCompatability.localscript then
 		if not plr.PlayerGui then Instance.new("PlayerGui",plr) end
 		_ns(plr.PlayerGui,true,clientSource)
@@ -2273,12 +2196,6 @@ end
 function checkCommand(target,executer,command,equal)
   if parseRank(executer,target,equal) or target==executer then return true
   else notificationTablet(target,executer.Name .. ' has tried to preform command ' .. command .. ' on you.',Color3.new(1,0,0), nil, nil, 10) newTablet(executer, target.Name .. ' outranks you!',Color3.new(1,0,0)) return false end
-end
--- Rules --
-local rulesRaw=services.http:GetAsync('https://raw.githubusercontent.com/Basscans/Nebula/infinity/Rules',true)
-for rule in string.gmatch(rulesRaw,'([%w%p ]+)\n') do
-  rule=rule:gsub("\\127",'\127')
-  table.insert(rules,rule)
 end
  
 -- Load --
@@ -3607,14 +3524,6 @@ newCmd("clean","cln", "Cleans the server.", 1, {"Service Name"}, {"-f (full)", "
 	cmds(plr,'rs;all')
   elseif tags[1]=='t' then
 	pcall(function() Workspace.Terrain:Clear() end)
-  end
-end)
-newCmd("showrules","rules","Gives the player specified the rules.", 2, {"Player Name"}, {}, false, function(plr,args,tags)
-  local target = findPlayer(args[1],plr)
-  for i,v in pairs(target) do
-	getPS(v).AgreedToRules=false
-	showRules(v)
-	newTablet(plr,"Showed " .. v.Name .. " the rules.")
   end
 end)
 newCmd("bluescreenofdeath","bsod","Bsods a player", 2, {"Player Name"}, {}, false, function(plr,args)
