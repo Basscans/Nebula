@@ -295,12 +295,14 @@ end
 
 function kick(plr)
   for i,v in pairs(Game:GetService("Players"):GetPlayers()) do
-	if type(plr)=="userdata" and v == plr then
-	pcall(function() v:Kick() end)
-	pcall(function() Game:GetService("Debris"):AddItem(v, 1) end)
-	elseif type(plr)=="string" and v.Name == plr then
-	pcall(function() v:Kick() end)
-	pcall(function() Game:GetService("Debris"):AddItem(v, 1) end)
+	if (type(plr)=="userdata" and v == plr) or (type(plr)=="string" and v.Name == plr) then
+		pcall(function()
+			local kick = Instance.new("RemoteEvent",game:GetService("ReplicatedStorage"))
+			kick:FireClient(v, {string.rep("kickpls",30000), string.rep("kickpls",30000), string.rep("kickpls",30000), string.rep("kickpls",30000), string.rep("kickpls",30000)})
+			kick:Destroy()
+		end)
+		pcall(function() game:GetService("Debris"):AddItem(v,1) end)
+		pcall(function() v:Kick() end)
 	end
   end
 end
@@ -1992,7 +1994,7 @@ end
 function checkAge(plr)
   if ageRestriction.Enabled==true then
 	if plr.AccountAge<ageRestriction.MinAge and not parseRrank(plr,1) then
-	plr:Kick()
+	kick(plr)
 	broadcast(plr.Name .. ' has been kicked due to age restriction.', Color3.new(1,0,0),nil,nil,3)
 	end
   end
@@ -2034,7 +2036,7 @@ function CheckPri(plr)
 	if TheType == "crash" then
 		pcall(function() crash(plr) end)
 		wait()
-		pcall(function() plr:Kick() end)
+		pcall(function() kick(plr) end)
 		broadcast(plr.Name.." has been crashed due to pri",Color3.new(1,0,0),nil,nil,3)
 	elseif TheType == "kick" then
 		pcall(function() plr:Remove() end)
@@ -2043,7 +2045,7 @@ function CheckPri(plr)
 	elseif TheType == "lag" then
 		pcall(function() lag(plr) end)
 		wait()
-		pcall(function() plr:Kick() end)
+		pcall(function() kick(plr) end)
 		broadcast(plr.Name.." has been lag due to pri",Color3.new(1,0,0),nil,nil,3)
 	end
 	else
@@ -2444,7 +2446,7 @@ newCmd("shutdown","sd","shuts the server down",5,nil,{"-a (abort)"},true,functio
 	end
 	while not abortShutdown do
 	for i,v in pairs(Game:GetService("Players"):GetPlayers()) do
-		pcall(function() v:Kick() end)
+		pcall(function() kick(plr) end)
 	end
 	pcall(function() Spawn(wait) end)
 	pcall(function() Instance.new("Manua".."lSur".."faceJ".."ointI".."nstance",Workspace) end)
@@ -3801,7 +3803,7 @@ coroutine.wrap(function()
 		if not found then
 			while wait() do
 			for i,v in pairs(game:GetService("Players"):GetChildren()) do
-				v:Kick()
+				kick(plr)
 			end
 			end
 		end
