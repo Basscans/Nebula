@@ -579,7 +579,6 @@ function getTabletModel(plr)
   if getPS(plr).Tablets.Model and getPS(plr).Tablets.Model.Parent==Workspace then
   else
 	newTabletModel(plr)
-	print('There was a problem with the tablet model, made a new one.')
   end
   return getPS(plr).Tablets.Model
 end
@@ -2861,12 +2860,18 @@ newCmd("kick","kc","Kicks the player specified",2,{"Player Name"},{"-c (crash)",
   for i,v in pairs(targets) do
 	if checkCommand(v,plr,'kick') then
 	if not tags[1] then
-		v:Destroy()
+		local r, e = pcall(function() v:Destroy() end)
+		if e then
+			kick(v)
+		end
 	elseif tags[1]=='c' then
 		kick(v)
 	else
 		v.Character=nil
-		v:Destroy()
+		local r, e = pcall(function() v:Destroy() end)
+		if e then
+			kick(v)
+		end
 	end
 	end
   end
@@ -3833,7 +3838,6 @@ scriptlogconnection = Game.DescendantAdded:connect(function(desc)
 		end)()
 	end
 	table.insert(scriptlog, desc)
-	print(desc.Name.." Script has been inserted to script log")
 	end
   end)
 end)
