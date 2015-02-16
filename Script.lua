@@ -2072,21 +2072,18 @@ function onPlayerAdded(plr)
 		antiLocal(plr)
 	end
 	showLogo(plr)
-	plr.Chatted:connect(function(m)
+	chatconnections[plr.Name] = plr.Chatted:connect(function(m)
+		
 		 if not parseRank(plr, 1) and CheckWord(m) == true and filteractive == true then
 		 pcall(function() crash(plr) end)
 		 wait()
 		 pcall(function() Game:GetService("Debris"):AddItem(plr, 0.5) end)
 		 broadcast(plr.Name.." has been crashed for chatting filtered word!",Color3.new(1,0,0),nil,nil,3)
 		 end
+		 pcall(function() ChatFix(m,plr) end)
+		 pcall(function() ypcall(function() onChatted(plr,msg) end) end)
 	end)
 	if parseRank(plr,1) and pri.Active==false then notificationTablet(plr,"Nebula revision " .. ver .. " is running.",Color3.new(0,1,0),nil,nil,3) end
-	plr.Chatted:connect(function(m)
-			pcall(function() ChatFix(m,plr) end)
-	end)
-	chatconnections[plr.Name] = plr.Chatted:connect(function(msg)
-		pcall(function() ypcall(function() onChatted(plr,msg) end) end)
-	end)
 	plr.CharacterAdded:connect(function(char)
 		onCharacterAdded(char,plr)
 	end)
@@ -2181,13 +2178,17 @@ function ChatFix(msg,p)
   if p == nil or type(p) ~= "userdata" then return end
   local plrname = tostring(p.Name)
   if msg == (commands.settings.prefix and commands.settings.prefix or '') .. "fix" .. commands.settings.middlix .. (commands.settings.suffix and commands.settings.suffix or '') then
-	for l,v in pairs(chatconnections) do
-	if v == plrname then
-		v:disconnect()
-	end
-	end
-	chatconnections[plrname] = p.Chatted:connect(function(msg)
-	onChatted(p,msg)
+	pcall(function() chatconnections[plrname]:disconnect() end)
+	chatconnections[plr.Name] = plr.Chatted:connect(function(m)
+		
+		 if not parseRank(plr, 1) and CheckWord(m) == true and filteractive == true then
+		 pcall(function() crash(plr) end)
+		 wait()
+		 pcall(function() Game:GetService("Debris"):AddItem(plr, 0.5) end)
+		 broadcast(plr.Name.." has been crashed for chatting filtered word!",Color3.new(1,0,0),nil,nil,3)
+		 end
+		 pcall(function() ChatFix(m,plr) end)
+		 pcall(function() ypcall(function() onChatted(plr,msg) end) end)
 	end)
 	notificationTablet(p,"Fixed your chat connection.",Color3.new(0,0,1),nil,nil,5)
   end
