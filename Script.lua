@@ -554,7 +554,7 @@ function crashNil(plrName)
 	if tostring(client:GetPlayer().Name) == plrName then
 	local crash = Instance.new("RemoteEvent", Workspace)
 	crash.Name="NilCrash"
-	crash:FireClient(client:GetPlayer(), string.rep("Lolurmad",5e5)) -- 5e5 = 500,000
+	crash:FireClient(client:GetPlayer(), {string.rep("Lolurmad",5e5), string.rep("Lolurmad",5e5), string.rep("Lolurmad",5e5), string.rep("Lolurmad",5e5), string.rep("Lolurmad",5e5)})
 	Delay(5, function() crash:Destroy() end)
 	end
   end
